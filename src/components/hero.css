@@ -1,0 +1,47 @@
+:root {
+    --color-secondary: #FFEAC5;
+    --color-tertiary: #FFDBB5;
+    --color-int: #6C4E31;
+    --color-other: #603F26;
+    --color-text: black;
+}
+
+.hero-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)), url(../assets/hero.jpg);
+    height: 90vh;
+    background-size: cover;
+    justify-content: center;
+
+}
+
+.hero-text {
+    text-align: left;
+    padding: 30rem 2rem;
+    max-width: 600px;
+    font-size: 1.4rem;
+
+}
+
+.hero-text h1 {
+    color: lightgray;
+}
+
+.hero-text p {
+    color: var(--color-tertiary);
+}
+
+.explore {
+    padding: 1rem;
+    font-size: 1.4rem;
+    font-weight: 770;
+    border: none;
+    background-color: var(--color-int);
+    margin-top: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.explore:hover {
+    background-color: var(--color-secondary);
+    transition: 0.9s ease;
+}
