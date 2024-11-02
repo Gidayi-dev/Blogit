@@ -27,11 +27,17 @@
     border: none;
     background-color: var(--color-secondary);
     font-size: 1.4rem;
-    margin-top: 1rem;
+    top: 3rem;
+    text-decoration: none;
+    color: var(--color-text);
 }
 
 .button:hover {
     background-color: var(--color-other);
     transition: 0.9s ease;
     cursor: pointer;
+}
+
+.login {
+    margin-top: 1.4rem;
 }

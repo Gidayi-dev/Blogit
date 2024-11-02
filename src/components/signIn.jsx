@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import './signIn.css';
 
 const SignIn = () => {
   const [formData, setFormData] = useState({
@@ -29,6 +30,7 @@ const SignIn = () => {
         onChange={handleChange}
         required
       />
+      <br /> <br />
       <input
         type="password"
         name="password"
@@ -37,6 +39,7 @@ const SignIn = () => {
         onChange={handleChange}
         required
       />
+      <br /> <br />
       <button type="submit">Sign In</button>
     </form>
   );

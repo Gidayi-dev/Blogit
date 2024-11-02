@@ -3,7 +3,8 @@ import React, { useState } from "react";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
-    username: "",
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
     confirmPassword: ""
@@ -28,17 +29,28 @@ const SignUp = () => {
   };
 
   return (
+    <div className="sign-up">
     <form className="form" onSubmit={handleSubmit}>
       <h2>Sign Up</h2>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <input
         type="text"
-        name="username"
-        placeholder="Username"
-        value={formData.username}
+        name="Name"
+        placeholder="First name"
+        value={formData.firstname}
         onChange={handleChange}
         required
       />
+      <br /> <br />
+      <input
+        type="text"
+        name="Name"
+        placeholder="Last name"
+        value={formData.lastname}
+        onChange={handleChange}
+        required
+      />
+      <br /> <br />
       <input
         type="email"
         name="email"
@@ -47,6 +59,7 @@ const SignUp = () => {
         onChange={handleChange}
         required
       />
+      <br /> <br />
       <input
         type="password"
         name="password"
@@ -55,6 +68,7 @@ const SignUp = () => {
         onChange={handleChange}
         required
       />
+      <br /> <br />
       <input
         type="password"
         name="confirmPassword"
@@ -63,8 +77,10 @@ const SignUp = () => {
         onChange={handleChange}
         required
       />
+      <br /> <br />
       <button type="submit">Sign Up</button>
     </form>
+    </div>
   );
 };
 
