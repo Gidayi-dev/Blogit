@@ -13,33 +13,54 @@ const SignIn = () => {
     };
   
     const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log("Sign In Data:", formData);
-      // Handle form submission logic here
+        e.preventDefault();
+       //console.log('Form data submitted:' formData);
+
     };
-  
-    return (
-      <form className="form" onSubmit={handleSubmit}>
-        <h2>Sign In</h2>
-        <input
-          type="text"
-          name="usernameOrEmail"
-          placeholder="Username or Email"
-          value={formData.usernameOrEmail}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">Sign In</button>
-      </form>
-    );
-  };
-  
-  export default SignIn;
+
+    return(
+        <form onSubmit={handleSubmit}>
+            <label>
+                FirstName
+                <br />
+                <input 
+                type='text'
+                name='name'
+                value={formData.FirstName}
+                onChange={handleChange}
+                />
+            </label>
+            <br />
+            <br />
+            <label>
+            LastName
+            <br />
+                <input 
+                type='text'
+                name='name'
+                value={formData.LastName}
+                onChange={handleChange}
+                />
+            </label>
+            <br />
+            <br />
+            <label>
+                EmailAddress
+                <br />
+                <input
+                type='email'
+                name='email'
+                value={formData.EmailAddress}
+                onChange={handleChange}
+                />
+                <br />
+                <br />
+                <button type='submit'>Create your account</button>
+                <br /> <br />
+                <button type='submit'>Login</button>
+            </label>
+        </form>
+    )
+}
+
+export default SignIn;
