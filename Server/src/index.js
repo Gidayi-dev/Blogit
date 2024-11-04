@@ -1,11 +1,16 @@
 import express from "express";
 import bcrypt from "bcryptjs";
+import cors from 'cors';
 import { PrismaClient } from "@prisma/client";
 
 const app = express();
 app.use(express.json());
 //whenever form is used
 app.use(express.urlencoded({ extended: true }))
+app.use(cors({
+  origin: ["http://localhost:5175"],
+  methods: ["GET", "POST", "PATCH", "PUT", "DELETE"]
+}))
 
 const client = new PrismaClient();
 app.post("/users", async (req, res) => {

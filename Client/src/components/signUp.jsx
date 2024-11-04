@@ -25,13 +25,18 @@ const SignUp = () => {
           "Content-Type": "application/json"
         }
       })
-      if(!response.ok) {
-        throw new Error("Failed to sign up");
+      // console.log(response);
+
+      if(response === false) {
+        const error = await response.json();
+        console.log(error);
+        throw new Error(error.message)
       }
-      return response.json();
+      const data = await response.json();
+      return data;
     },
-    onSuccess: () => navigate("/signin"),
-    onError: () => setError("Error signing up. Please try again.")
+    // onSuccess: () => navigate("/signin"),
+    // onError: () => setError("Error signing up. Please try again.")
   }); 
 
   const [error, setError] = useState("");

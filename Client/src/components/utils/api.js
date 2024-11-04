@@ -1,3 +1,3 @@
-const apiBase = import.meta.env.VITE_API_BASE;
+const apiBase = "http://localhost:4000";
 
 export default apiBase;
