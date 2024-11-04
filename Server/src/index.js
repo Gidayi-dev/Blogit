@@ -4,6 +4,8 @@ import { PrismaClient } from "@prisma/client";
 
 const app = express();
 app.use(express.json());
+//whenever form is used
+app.use(express.urlencoded({ extended: true }))
 
 const client = new PrismaClient();
 app.post("/users", async (req, res) => {

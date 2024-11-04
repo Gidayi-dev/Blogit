@@ -1,5 +1,8 @@
 
 import React, { useState } from "react";
+import { useMutation } from "react-query";
+import apiBase from "./utils/api";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +12,28 @@ const SignUp = () => {
     password: "",
     confirmPassword: ""
   });
+
+
+  const navigate = useNavigate();
+
+  const {mutate, isLoading} = useMutation({
+    mutationFn: async function(newUser) {
+      const response = await fetch(`${apiBase}/users`, {
+        method: "POST",
+        body: JSON.stringify(newUser),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      if(!response.ok) {
+        throw new Error("Failed to sign up");
+      }
+      return response.json();
+    },
+    onSuccess: () => navigate("/signin"),
+    onError: () => setError("Error signing up. Please try again.")
+  }); 
+
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
@@ -24,7 +49,8 @@ const SignUp = () => {
       return;
     }
     setError(""); 
-    console.log("Sign Up Data:", formData);
+    // console.log("Sign Up Data:", formData);
+    mutate(formData);
     
   };
 
@@ -35,7 +61,7 @@ const SignUp = () => {
       {error && <p style={{ color: "red" }}>{error}</p>}
       <input
         type="text"
-        name="Name"
+        name="firstname"
         placeholder="First name"
         value={formData.firstname}
         onChange={handleChange}
@@ -44,7 +70,7 @@ const SignUp = () => {
       <br /> <br />
       <input
         type="text"
-        name="Name"
+        name="lastname"
         placeholder="Last name"
         value={formData.lastname}
         onChange={handleChange}
@@ -78,7 +104,10 @@ const SignUp = () => {
         required
       />
       <br /> <br />
-      <button type="submit">Sign Up</button>
+      <button type="submit" disabled={isLoading}>
+        { isLoading ? "Loading Please wait...": "Sign Up"}
+        
+      </button>
     </form>
     </div>
   );
