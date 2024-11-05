@@ -59,4 +59,41 @@ app.post("/users", async (req, res) => {
   }
 });
 
+app.post("/auth/SignIn", async (req, res) => {
+  try {
+    // Read the email address and the plain password from the client/user
+    const { emailAddress, password } = req.body;
+
+    // Check if the user exists: querying the database against the email
+    const user = await client.user.findFirst({
+      where: { emailAddress: emailAddress },
+    });
+
+    if (!user) {
+      return res
+        .status(401)
+        .json({ message: "Wrong email address or password" });
+    }
+
+    //verify password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res
+        .status(401)
+        .json({ message: "Wrong email address or password" });
+    }
+    //successfully signed in
+    res
+      .status(200)
+      .json({
+        message: "Login successfully",
+        user: { id: user.id, emailAddress: user.emailAddress },
+      });
+    //authentication failure if user does not exist
+    res.send("logging the user in");
+  } catch (e) {
+    console.error("SignIn error:", e);
+    res.status(500).json({ message: "Something went wrong please try again" });
+  }
+});
 app.listen(4000, () => console.log("Server running..."));
