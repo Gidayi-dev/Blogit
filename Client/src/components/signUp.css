@@ -1,36 +1,36 @@
 :root {
-    --color-secondary: #FFEAC5;
-    --color-tertiary: #FFDBB5;
-    --color-int: #6C4E31;
-    --color-other: #603F26;
-    --color-text: black;
+  --color-secondary: #ffeac5;
+  --color-tertiary: #ffdbb5;
+  --color-int: #6c4e31;
+  --color-other: #603f26;
+  --color-text: black;
 }
 
 form {
-    margin: 2rem 7rem;
+  margin: 2rem 7rem;
 }
 
 label {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 input {
-    padding: 0.4rem;
-    width: 300px;
-    height: 1.4rem;
-    border-radius: 4px;
+  padding: 0.4rem;
+  width: 300px;
+  height: 1.4rem;
+  border-radius: 4px;
 }
 
 button {
-    padding: 0.8rem;
-    font-size: 1.2rem;
-    border-radius: 8px;
-    border: none;
-    background-color: var(--color-other);
-    cursor: pointer;
+  padding: 0.8rem;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--color-other);
+  cursor: pointer;
 }
 
 button:hover {
-    background-color: var(--color-tertiary);
-    transition: 0.9s ease;
+  background-color: var(--color-tertiary);
+  transition: 0.9s ease;
 }

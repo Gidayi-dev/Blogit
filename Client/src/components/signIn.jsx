@@ -1,11 +1,10 @@
-
 import React, { useState } from "react";
-import './signIn.css';
+import "./signIn.css";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({
     usernameOrEmail: "",
-    password: ""
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -16,7 +15,6 @@ const SignIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Sign In Data:", formData);
-    
   };
 
   return (

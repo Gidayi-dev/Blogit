@@ -1,43 +1,43 @@
 :root {
-    --color-secondary: #FFEAC5;
-    --color-tertiary: #FFDBB5;
-    --color-int: #6C4E31;
-    --color-other: #603F26;
-    --color-text: black;
+  --color-secondary: #ffeac5;
+  --color-tertiary: #ffdbb5;
+  --color-int: #6c4e31;
+  --color-other: #603f26;
+  --color-text: black;
 }
 
 .header-section {
-    display: flex;
-    justify-content: space-between;
-    height: 70px;
-    background-color: var(--color-tertiary);
-    box-shadow: 10px 10px 7px rgba(101, 67, 33, 0.9);
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  background-color: var(--color-tertiary);
+  box-shadow: 10px 10px 7px rgba(101, 67, 33, 0.9);
 }
 
 .logo img {
-    width: 40px;
-    margin-left: 0.2rem;
-    margin-top: 0.2rem;
+  width: 40px;
+  margin-left: 0.2rem;
+  margin-top: 0.2rem;
 }
 
 .button {
-    margin-left: 3.4rem;
-    padding: 1rem;
-    border-radius: 8px;
-    border: none;
-    background-color: var(--color-secondary);
-    font-size: 1.4rem;
-    top: 3rem;
-    text-decoration: none;
-    color: var(--color-text);
+  margin-left: 3.4rem;
+  padding: 1rem;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--color-secondary);
+  font-size: 1.4rem;
+  top: 3rem;
+  text-decoration: none;
+  color: var(--color-text);
 }
 
 .button:hover {
-    background-color: var(--color-other);
-    transition: 0.9s ease;
-    cursor: pointer;
+  background-color: var(--color-other);
+  transition: 0.9s ease;
+  cursor: pointer;
 }
 
 .login {
-    margin-top: 1.4rem;
+  margin-top: 1.4rem;
 }
