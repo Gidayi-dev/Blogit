@@ -19,6 +19,10 @@ function Hero() {
           journey and find inspiration for your own path.
         </p>
         <button className="explore" onClick={handleCreateBlogClick}>
+          Explore Blogs
+        </button>
+        <br />
+        <button className="explore" onClick={handleCreateBlogClick}>
           Create Your Blog
         </button>
       </div>

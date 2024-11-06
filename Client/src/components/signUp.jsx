@@ -7,7 +7,7 @@ const SignUp = () => {
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
-    email: "",
+    emailAddress: "",
     password: "",
     confirmPassword: "",
   });
@@ -84,7 +84,7 @@ const SignUp = () => {
           type="email"
           name="email"
           placeholder="Email"
-          value={formData.email}
+          value={formData.emailAddress}
           onChange={handleChange}
           required
         />

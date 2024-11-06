@@ -106,7 +106,9 @@ const SignIn = () => {
     onError: (error) => {
       setErrorMessage(error.message); // Display error message from API
     },
-    onSuccess: (data) => {
+    onSuccess: (user) => {
+      setUser(user);
+      navigate("/Your Blogs");
       alert("Sign-in successful!"); // Show success message or redirect
     },
   });
@@ -131,15 +133,21 @@ const SignIn = () => {
     }
 
     // Submit the form using mutate
-    mutate({emailAddress, password});
+    mutate({ emailAddress, password });
+    // setUser ({
+    //   firstname: "Milly",
+    //   lastname: "Gidayi",
+    //   emailAddress: "gidayi@gmail.com",
+
+    // });
+    // navigate("/Your Blogs");
   };
 
   return (
     <form className="form" onSubmit={handleSubmit}>
       <h2>Sign In</h2>
-
-      {errorMessage && <div className="error-message">{errorMessage}</div>} {/* Display error message */}
-
+      {errorMessage && <div className="error-message">{errorMessage}</div>}{" "}
+      {/* Display error message */}
       <input
         type="text"
         name="usernameOrEmail"
@@ -158,8 +166,8 @@ const SignIn = () => {
         required
       />
       <br /> <br />
-      <button type="submit" disabled={isLoading} >
-      {isLoading ? "Loading Please wait..." : "Sign In"}
+      <button type="submit" disabled={isLoading}>
+        {isLoading ? "Loading Please wait..." : "Sign In"}
       </button>
       {/* <p className="text">
         Don't have an account?{" "}
@@ -173,4 +181,3 @@ const SignIn = () => {
 };
 
 export default SignIn;
-
