@@ -14,11 +14,24 @@ datasource db {
 }
 
 model User {
-  id String @default(uuid()) @id
-  firstname String
-  lastname String
+  id           String @id @default(uuid())
+  firstname    String
+  lastname     String
   emailAddress String @unique
-  password String
+  password     String
+  blogs        Blog[]
 
   @@map("users")
+}
+
+model Blog {
+  id        String   @id @default(uuid())
+  title     String
+  // synopsis String
+  // body String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  owner     String
+  user      User     @relation(fields: [owner], references: [id])
 }
