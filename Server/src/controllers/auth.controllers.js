@@ -27,7 +27,7 @@ export const signInUser = async (req, res) => {
         .json({ message: "Wrong email address or password" });
     }
     //successfully signed in, so generate a token, save the id in there
-    const token = jwt.sign(user, process.env.JWT_SECRET);
+    const token = jwt.sign(user.id, process.env.JWT_SECRET);
 
     // res
     //   .status(200)
@@ -39,6 +39,6 @@ export const signInUser = async (req, res) => {
     res.status(200).cookie("authToken", token, { httpOnly: true }).json(user);
   } catch (e) {
     console.error("SignIn error:", e);
-    res.status(500).json({ message: e.message });
+    res.status(500).json({ message: "Something went wrong" });
   }
 };

@@ -11,7 +11,7 @@
   justify-content: space-between;
   height: 70px;
   background-color: var(--color-tertiary);
-  box-shadow: 10px 10px 7px rgba(101, 67, 33, 0.9);
+  /* box-shadow: 10px 10px 7px rgba(101, 67, 33, 0.9); */
 }
 
 .logo img {

@@ -21,7 +21,6 @@ function Hero() {
         <button className="explore" onClick={handleCreateBlogClick}>
           Explore Blogs
         </button>
-        <br />
         <button className="explore" onClick={handleCreateBlogClick}>
           Create Your Blog
         </button>
