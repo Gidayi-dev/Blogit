@@ -5,6 +5,9 @@ function Account() {
   return (
     <div className="head">
       <nav className="nav">
+        <Link to="/Hero" className="nav-links">
+          Home
+        </Link>
         <Link to="/AllBlogs" className="nav-links">
           All Blogs
         </Link>

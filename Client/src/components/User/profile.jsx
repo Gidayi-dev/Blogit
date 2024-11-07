@@ -26,7 +26,7 @@ const Profile = () => {
     fetchUserData();
   }, []);
   const handleBlogClick = (blogId) => {
-    navigate(`/blog/$blogId`);
+    navigate(`/Profile`);
   };
 
   return (

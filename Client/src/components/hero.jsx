@@ -7,6 +7,9 @@ function Hero() {
   const handleCreateBlogClick = () => {
     navigate("/signup");
   };
+  const handleExploreBlogClick = () => {
+    navigate("/AllBlogs");
+  };
 
   return (
     <div className="hero-section">
@@ -18,7 +21,7 @@ function Hero() {
           productivity tips to creative pursuits and storytelling. Join the
           journey and find inspiration for your own path.
         </p>
-        <button className="explore" onClick={handleCreateBlogClick}>
+        <button className="explore" onClick={handleExploreBlogClick}>
           Explore Blogs
         </button>
         <button className="explore" onClick={handleCreateBlogClick}>

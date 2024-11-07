@@ -219,6 +219,7 @@ const SignIn = () => {
       setErrorMessage(error.message);
     },
     onSuccess: () => {
+      // localStorage.setItem("isAuthenticated", "true");
       navigate("/account"); // Redirect on successful sign-in
     },
   });
