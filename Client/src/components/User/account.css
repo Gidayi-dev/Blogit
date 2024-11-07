@@ -1,41 +1,42 @@
 :root {
-    --color-secondary: #ffeac5;
-    --color-tertiary: #ffdbb5;
-    --color-int: #6c4e31;
-    --color-other: #603f26;
-    --color-text: black;
-  }
+  --color-secondary: #ffeac5;
+  --color-tertiary: #ffdbb5;
+  --color-int: #6c4e31;
+  --color-other: #603f26;
+  --color-text: black;
+}
 
 .head {
-    height: 7rem;
-    background-color: #f9f9f9;
-    box-shadow: rgba(0, 0, 0, 0.1);
+  height: 7rem;
+  background-color: #f9f9f9;
+  box-shadow: rgba(0, 0, 0, 0.1);
 }
 
 .nav {
-    text-align: center;
+  text-align: center;
 }
 
 .nav-links {
-    margin-right: 2rem;
-    text-decoration: none;
-    font-size: 1.4rem;
-    color: gray;
+  margin-right: 2rem;
+  text-decoration: none;
+  font-size: 1.4rem;
+  color: gray;
 }
 
 .profile-button {
-    background-color: azure;
-    color: gray;
+  background-color: azure;
+  color: gray;
 }
 
 .profile-button:hover {
-    background-color: #ffeac5;
+  background-color: #ffeac5;
 }
 
 .head h2 {
-    text-align: center;
+  text-align: center;
 }
 
-.head h2:hover, .nav-links:hover {
-    color: #603f26;
+.head h2:hover,
+.nav-links:hover {
+  color: #603f26;
 }

@@ -1,0 +1,32 @@
+.blogs-list {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 20px;
+}
+
+.blog-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.blog-card:hover {
+  transform: scale(1.02);
+}
+
+h3 {
+  margin: 0;
+  font-size: 24px;
+}
+
+p {
+  font-size: 16px;
+  color: #555;
+}
+
+p:first-of-type {
+  font-weight: bold;
+}

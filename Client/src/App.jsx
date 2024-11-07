@@ -7,6 +7,8 @@ import SignIn from "./components/signIn";
 import SignUp from "./components/signUp";
 import Account from "./components/User/accountHeader";
 import Write from "./components/User/write";
+import AllBlogs from "./components/User/allBlogs";
+import Profile from "./components/User/profile";
 
 const client = new QueryClient();
 
@@ -29,6 +31,8 @@ const App = () => {
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/Account" element={<Account />} />
           <Route path="/Write" element={<Write />} />
+          <Route path="/AllBlogs" element={<AllBlogs />} />
+          <Route path="/Profile" element={<Profile />} />
         </Routes>
       </Router>
     </QueryClientProvider>

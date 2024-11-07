@@ -241,6 +241,7 @@ const SignIn = () => {
   return (
     <form className="form" onSubmit={handleSubmit}>
       <h2>Sign In</h2>
+      <br />
       {errorMessage && <div className="error-message">{errorMessage}</div>}
       <input
         type="text"
@@ -250,6 +251,7 @@ const SignIn = () => {
         onChange={handleChange}
         required
       />
+      <br /> <br />
       <input
         type="password"
         name="password"
@@ -258,6 +260,8 @@ const SignIn = () => {
         onChange={handleChange}
         required
       />
+      <br />
+      <br />
       <button type="submit" disabled={isLoading}>
         {isLoading ? "Loading..." : "Sign In"}
       </button>

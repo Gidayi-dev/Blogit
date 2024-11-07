@@ -1,0 +1,46 @@
+.profile-container {
+  padding: 20px;
+}
+
+.profile-info {
+  margin-bottom: 20px;
+}
+
+.profile-info h2 {
+  font-size: 28px;
+  color: #333;
+}
+
+.profile-info p {
+  font-size: 18px;
+  color: #666;
+}
+
+.profile-picture-section {
+  margin-top: 30px;
+}
+
+.profile-picture-preview img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+input[type="file"] {
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
