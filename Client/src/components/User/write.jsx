@@ -14,13 +14,14 @@ const Write = () => {
 
   const { mutate, isLoading } = useMutation({
     mutationFn: async (newBlog) => {
-      const response = await fetch(`${apiBase}/blogs`, {
+      const response = await fetch(`http://localhost:4000/blogs`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newBlog),
       });
+
       return response.json();
     },
     onSuccess: () => {

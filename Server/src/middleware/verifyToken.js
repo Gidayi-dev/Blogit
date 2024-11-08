@@ -4,7 +4,7 @@ function verifyToken(req, res, next) {
   const { authToken } = req.cookies;
   jwt.verify(authToken, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
-      res.status(401).json({ message: "Unauthorized" });
+      res.status(401).json({ message: err.message });
       return;
     }
     // console.log(decoded);

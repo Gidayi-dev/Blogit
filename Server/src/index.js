@@ -3,7 +3,10 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { registerUser } from "./controllers/users.controllers.js";
 import { signInUser } from "./controllers/auth.controllers.js";
-import { createBlog } from "./controllers/blogs.controllers.js";
+import {
+  createBlog,
+  fetchSingleNote,
+} from "./controllers/blogs.controllers.js";
 import validateUserInformation from "./middleware/validateUserInformation.js";
 import verifyToken from "./middleware/verifyToken.js";
 import validateBlog from "./middleware/validateBlog.js";
@@ -25,5 +28,6 @@ app.use(cookieParser());
 app.post("/users", validateUserInformation, registerUser);
 app.post("/auth/SignIn", signInUser);
 app.post("/blogs", verifyToken, validateBlog, createBlog);
+app.get("/blogs/:id", verifyToken, fetchSingleNote);
 //server
 app.listen(4000, () => console.log("Server running..."));
