@@ -42,6 +42,21 @@ export async function fetchSingleBlog(req, res) {
       .json({ message: "Something went wrong please try again later" });
   }
 }
+
+export async function fetchAllBlogs(req, res) {
+  const { id } = req.params;
+  try {
+    const blogs = await prisma.blog.findMany({
+      where: { id },
+      include: {
+        user: true,
+      },
+    });
+    res.status(200).json(blogs);
+  } catch (e) {
+    res.status(500).json({ message: e.message });
+  }
+}
 // import { PrismaClient } from "@prisma/client";
 // const prisma = new PrismaClient();
 

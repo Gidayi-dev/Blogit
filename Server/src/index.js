@@ -6,6 +6,7 @@ import { signInUser } from "./controllers/auth.controllers.js";
 import {
   createBlog,
   fetchSingleBlog,
+  fetchAllBlogs,
 } from "./controllers/blogs.controllers.js";
 import validateUserInformation from "./middleware/validateUserInformation.js";
 import verifyToken from "./middleware/verifyToken.js";
@@ -29,5 +30,6 @@ app.post("/users", validateUserInformation, registerUser);
 app.post("/auth/SignIn", signInUser);
 app.post("/blogs", verifyToken, validateBlog, createBlog);
 app.get("/blogs/:id", verifyToken, fetchSingleBlog);
+app.get("/blogs", verifyToken, fetchAllBlogs);
 //server
 app.listen(4000, () => console.log("Server running..."));

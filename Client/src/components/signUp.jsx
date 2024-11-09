@@ -80,24 +80,12 @@ const SignUp = () => {
           required
         />
         <br /> <br />
-        {/* <input
+        <input
           type="email"
-          name="email"
+          name="emailAddress"
           placeholder="Email"
           value={formData.emailAddress}
           onChange={handleChange}
-          required
-        />
-        <br /> <br /> */}
-        <input
-          type="email"
-          name="email"
-          value={formData.emailAddress}
-          onChange={(e) => {
-            console.log(e.target.value);
-            setEmail(e.target.value);
-          }}
-          placeholder="Enter your email address"
           required
         />
         <br /> <br />

@@ -8,7 +8,7 @@ function Account() {
         <Link to="/Hero" className="nav-links">
           Home
         </Link>
-        <Link to="/AllBlogs" className="nav-links">
+        <Link to="/blogs" className="nav-links">
           All Blogs
         </Link>
         <Link to="/Write" className="nav-links">

@@ -1,45 +1,3 @@
-// import React from "react";
-// import { useQuery } from "react-query";
-// import { useParams } from "react-router-dom";
-// import apiBase from "../utils/api";
-// function FullBlog() {
-//   const { id } = useParams();
-//   // console.log(params)
-//   const { isLoading, isError, error } = useQuery({
-//     queryFn: async () => {
-//       const response = await fetch(`${apiBase}/blogs/${id}`, {
-//         credentials: "include",
-//       });
-//       console.log(response);
-//       if (response.ok === false) {
-//         const error = await response.json();
-//         throw new Error(error.message);
-//       }
-//       const data = await response.json();
-//       // console.log(data);
-//       return data;
-//     },
-//   });
-//   if (isLoading) {
-//     return <h2>Loading Please wait</h2>;
-//   }
-//   if (isError) {
-//     return <h2>{error.message}</h2>;
-//   }
-//   return (
-//     // style
-//     <div>
-//       <h1>{data.title}</h1>
-//       <p>
-//         By {data.user.firstname} {data.user.lastname}
-//       </p>
-//       <p>Last updated: {new Date(data.updatedAt).toDateString} </p>
-//       <p>{data.content}</p>
-//     </div>
-//   );
-// }
-// export default FullBlog;
-
 import React from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
@@ -47,17 +5,18 @@ import apiBase from "../utils/api";
 
 function FullBlog() {
   const { id } = useParams();
-  // console.log(params)
-  const { isLoading, isError, error } = useQuery({
+
+  // Fetch the specific blog by its ID
+  const { isLoading, isError, error, data } = useQuery({
+    queryKey: ["blog", id],
     queryFn: async () => {
       const response = await fetch(`${apiBase}/blogs/${id}`, {
         credentials: "include",
       });
-      // console.log(response);
 
-      if (response.ok === false) {
-        const error = await response.json();
-        throw new Error(error.message);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
       }
 
       return response.json();
@@ -71,19 +30,23 @@ function FullBlog() {
 
   // Error state
   if (isError) {
-    return <h2>{error.message}</h2>;
+    return <h2>Error: {error.message}</h2>;
   }
+
+  // Destructure data
+  const { title, content, updatedAt, user } = data;
 
   // Render the content if data is successfully fetched
   return (
-    // style
-    <div>
-      <h1>{data.title}</h1>
+    <div className="full-blog">
+      <h1>{title}</h1>
       <p>
-        By {data.user.firstname} {data.user.lastname}
+        By {user.firstname} {user.lastname}
       </p>
-      <p>Last updated: {new Date(data.updatedAt).toDateString()}</p>
-      <p>{data.content}</p>
+      <p>Last updated: {new Date(updatedAt).toDateString()}</p>
+      <div className="blog-content">
+        <p>{content}</p>
+      </div>
     </div>
   );
 }

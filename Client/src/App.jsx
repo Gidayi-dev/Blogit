@@ -9,7 +9,8 @@ import Account from "./components/User/accountHeader";
 import Write from "./components/User/write";
 import AllBlogs from "./components/User/allBlogs";
 import Profile from "./components/User/profile";
-// import FullBlog from ".components/User/fullBlog.jsx";
+import FullBlog from "./components/User/fullBlog.jsx";
+import Feed from "./components/User/feed.jsx";
 
 const client = new QueryClient();
 
@@ -34,7 +35,8 @@ const App = () => {
           <Route path="/Write" element={<Write />} />
           <Route path="/AllBlogs" element={<AllBlogs />} />
           <Route path="/Profile" element={<Profile />} />
-          {/* <Route path="/blogs/:id" element={<FullBlog />} /> */}
+          <Route path="/blogs/:id" element={<FullBlog />} />
+          <Route path="/blogs" element={<Feed />} />
         </Routes>
       </Router>
     </QueryClientProvider>

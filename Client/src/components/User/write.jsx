@@ -93,6 +93,7 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"; // Quill editor style
 import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 import apiBase from "../utils/api"; // Adjust according to your actual API base
 import Account from "./accountHeader"; // Assuming you have an account header component
 import "./write.css"; // Ensure you have a corresponding CSS file for styles
@@ -100,6 +101,7 @@ import "./write.css"; // Ensure you have a corresponding CSS file for styles
 const Write = () => {
   const [title, SetTitle] = useState(""); // To store the blog title
   const [content, setContent] = useState(""); // To store the blog content
+  const navigate = useNavigate();
 
   const handleTitleChange = (e) => SetTitle(e.target.value);
 
@@ -108,16 +110,22 @@ const Write = () => {
     mutationFn: async (newBlog) => {
       const response = await fetch(`${apiBase}/blogs`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newBlog),
       });
 
+      if (!response.ok) {
+        throw new Error("Failed to post blog");
+      }
+
       return response.json();
     },
     onSuccess: () => {
       alert("Blog post saved!");
+      navigate(`/blogs`);
     },
     onError: (error) => {
       alert("Failed to post blog: " + error.message);
