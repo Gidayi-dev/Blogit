@@ -5,7 +5,7 @@ import { registerUser } from "./controllers/users.controllers.js";
 import { signInUser } from "./controllers/auth.controllers.js";
 import {
   createBlog,
-  fetchSingleNote,
+  fetchSingleBlog,
 } from "./controllers/blogs.controllers.js";
 import validateUserInformation from "./middleware/validateUserInformation.js";
 import verifyToken from "./middleware/verifyToken.js";
@@ -28,6 +28,6 @@ app.use(cookieParser());
 app.post("/users", validateUserInformation, registerUser);
 app.post("/auth/SignIn", signInUser);
 app.post("/blogs", verifyToken, validateBlog, createBlog);
-app.get("/blogs/:id", verifyToken, fetchSingleNote);
+app.get("/blogs/:id", verifyToken, fetchSingleBlog);
 //server
 app.listen(4000, () => console.log("Server running..."));

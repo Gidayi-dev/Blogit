@@ -34,4 +34,6 @@ model Blog {
   updatedAt DateTime @updatedAt
   owner     String
   user      User     @relation(fields: [owner], references: [id])
+
+  @@map("blogs")
 }
