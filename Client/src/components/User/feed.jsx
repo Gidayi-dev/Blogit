@@ -1,11 +1,10 @@
 import React from "react";
 import { useQuery } from "react-query";
-import blogs from "../data/blogs"; // Fallback data if API fails
+import blogs from "../data/blogs";
 import apiBase from "../utils/api";
 import { Link } from "react-router-dom";
 
 function Feed() {
-  // Fetch blogs data from the API
   const { isLoading, isError, error, data } = useQuery({
     queryKey: ["blogs"],
     queryFn: async () => {
@@ -20,17 +19,14 @@ function Feed() {
     },
   });
 
-  // Loading state
   if (isLoading) {
     return <h2>Loading, please wait...</h2>;
   }
 
-  // Error state
   if (isError) {
     return <h2>Error: {error.message}</h2>;
   }
 
-  // Use fetched data, fallback to static `blogs` data if API returns empty or fails
   const blogData = data?.length ? data : blogs;
 
   return (

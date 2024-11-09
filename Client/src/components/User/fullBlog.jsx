@@ -2,11 +2,11 @@ import React from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import apiBase from "../utils/api";
+import "./fullblog.css";
 
 function FullBlog() {
   const { id } = useParams();
 
-  // Fetch the specific blog by its ID
   const { isLoading, isError, error, data } = useQuery({
     queryKey: ["blog", id],
     queryFn: async () => {
@@ -23,20 +23,16 @@ function FullBlog() {
     },
   });
 
-  // Loading state
   if (isLoading) {
     return <h2>Loading, please wait...</h2>;
   }
 
-  // Error state
   if (isError) {
     return <h2>Error: {error.message}</h2>;
   }
 
-  // Destructure data
   const { title, content, updatedAt, user } = data;
 
-  // Render the content if data is successfully fetched
   return (
     <div className="full-blog">
       <h1>{title}</h1>

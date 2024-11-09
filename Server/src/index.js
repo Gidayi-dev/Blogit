@@ -7,6 +7,7 @@ import {
   createBlog,
   fetchSingleBlog,
   fetchAllBlogs,
+  getUserBlogs,
 } from "./controllers/blogs.controllers.js";
 import validateUserInformation from "./middleware/validateUserInformation.js";
 import verifyToken from "./middleware/verifyToken.js";
@@ -29,6 +30,7 @@ app.use(cookieParser());
 app.post("/users", validateUserInformation, registerUser);
 app.post("/auth/SignIn", signInUser);
 app.post("/blogs", verifyToken, validateBlog, createBlog);
+app.get("/blogs/user", verifyToken, getUserBlogs);
 app.get("/blogs/:id", verifyToken, fetchSingleBlog);
 app.get("/blogs", verifyToken, fetchAllBlogs);
 //server

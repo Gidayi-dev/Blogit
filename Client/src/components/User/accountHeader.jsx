@@ -19,7 +19,7 @@ function Account() {
         </Link>
       </nav>
       <br />
-      <Link to="/Account" className="nav-links">
+      <Link to="/BlogsPage" className="nav-links">
         <h2>My Blogs</h2>
       </Link>
     </div>

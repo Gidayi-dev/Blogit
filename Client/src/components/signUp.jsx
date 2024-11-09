@@ -24,7 +24,6 @@ const SignUp = () => {
           body: JSON.stringify({}),
         },
       });
-      // console.log(response);
 
       if (response === false) {
         const error = await response.json();
@@ -53,7 +52,6 @@ const SignUp = () => {
       return;
     }
     setError("");
-    // console.log("Sign Up Data:", formData);
     mutate(formData);
   };
 

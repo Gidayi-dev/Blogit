@@ -40,7 +40,6 @@ const Profile = () => {
             <p>Member Since: {userData.joinDate || "2024-01-01"}</p>
           </div>
 
-          {/* Profile Picture Section */}
           <div className="profile-picture-section">
             <h3>Profile Picture</h3>
             <div className="profile-picture-preview">
@@ -59,7 +58,6 @@ const Profile = () => {
             <button onClick={handleSaveProfile}>Save Profile Picture</button>
           </div>
 
-          {/* User Blogs */}
           <div className="user-blogs">
             <h3>Your Blogs</h3>
             {userBlogs.length > 0 ? (
