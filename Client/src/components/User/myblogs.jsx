@@ -1,65 +1,70 @@
-import React, { useState, useEffect } from "react";
-import { FaEdit, FaTrash } from "react-icons/fa"; // Importing the icons
+import { useQuery, useMutation, useQueryClient } from "react-query";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import apiBase from "../utils/api";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./myblogs.css";
 
+const fetchBlogs = async () => {
+  const response = await fetch(`${apiBase}/blogs/user`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch blogs");
+  }
+
+  return response.json();
+};
+
+const deleteBlog = async (blogId) => {
+  const response = await fetch(`${apiBase}/blogs/${blogId}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete blog");
+  }
+
+  return blogId;
+};
+
 function BlogsPage() {
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const response = await fetch(`${apiBase}/blogs/user`, {
-          method: "GET",
-          credentials: "include",
-        });
+  const {
+    data: blogs,
+    isLoading,
+    isError,
+    error,
+  } = useQuery("blogs", fetchBlogs);
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch blogs");
-        }
+  const deleteMutation = useMutation(deleteBlog, {
+    onSuccess: (blogId) => {
+      queryClient.setQueryData("blogs", (prevBlogs) =>
+        prevBlogs.filter((blog) => blog.id !== blogId),
+      );
+      toast.success("Blog deleted successfully!");
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
 
-        const data = await response.json();
-        setBlogs(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchBlogs();
-  }, []);
-
-  const handleDelete = async (blogId) => {
+  const handleDelete = (blogId) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this blog?",
     );
     if (!confirmDelete) return;
 
-    try {
-      const response = await fetch(`${apiBase}/blogs/${blogId}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to delete blog");
-      }
-
-      setBlogs(blogs.filter((blog) => blog.id !== blogId));
-      toast.success("Blog deleted successfully!");
-    } catch (err) {
-      toast.error(err.message);
-    }
+    deleteMutation.mutate(blogId);
   };
 
   const handleEdit = (blogId) => {
-    navigate(`/EditBlog/${blogId}`);
+    navigate(`/Write/${blogId}`);
   };
 
   return (
@@ -83,13 +88,13 @@ function BlogsPage() {
       </nav>
 
       <div className="blogs-container">
-        {loading && <p>Loading blogs, please wait...</p>}
-        {error && <p>Error: {error}</p>}
-        {!loading && !error && blogs.length === 0 && (
+        {isLoading && <p>Loading blogs, please wait...</p>}
+        {isError && <p>Error: {error.message}</p>}
+        {!isLoading && !isError && blogs?.length === 0 && (
           <p>You don't have any blogs yet. Click here to create one.</p>
         )}
 
-        {!loading && !error && blogs.length > 0 && (
+        {!isLoading && !isError && blogs?.length > 0 && (
           <div className="blogs-list">
             {blogs.map((blog) => (
               <div key={blog.id} className="blog-item">

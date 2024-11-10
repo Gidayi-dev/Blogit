@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 const client = new PrismaClient();
 export const signInUser = async (req, res) => {
   try {
-    // Read the email address and the plain password from the client/user
     const { emailAddress, password } = req.body;
 
     // Check if the user exists: querying the database against the email

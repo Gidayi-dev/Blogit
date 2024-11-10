@@ -8,6 +8,7 @@ import {
   fetchSingleBlog,
   fetchAllBlogs,
   getUserBlogs,
+  deleteBlog,
 } from "./controllers/blogs.controllers.js";
 import validateUserInformation from "./middleware/validateUserInformation.js";
 import verifyToken from "./middleware/verifyToken.js";
@@ -33,5 +34,6 @@ app.post("/blogs", verifyToken, validateBlog, createBlog);
 app.get("/blogs/user", verifyToken, getUserBlogs);
 app.get("/blogs/:id", verifyToken, fetchSingleBlog);
 app.get("/blogs", verifyToken, fetchAllBlogs);
+app.delete("/blogs/:blogId", verifyToken, deleteBlog);
 //server
 app.listen(4000, () => console.log("Server running..."));
