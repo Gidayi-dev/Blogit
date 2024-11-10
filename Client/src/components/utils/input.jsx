@@ -6,7 +6,7 @@ function Input({ onImageUpload }) {
   const uploadImage = (files) => {
     const formData = new FormData();
     formData.append("file", files[0]);
-    formData.append("upload_preset", "Gidayi"); // Your Cloudinary upload preset
+    formData.append("upload_preset", "Gidayi");
 
     fetch("https://api.cloudinary.com/v1_1/dzl6ktrtc/image/upload", {
       method: "POST",
@@ -16,7 +16,7 @@ function Input({ onImageUpload }) {
       .then((data) => {
         setImage(data.secure_url);
         if (onImageUpload) {
-          onImageUpload(data.secure_url); // Pass the URL back to the parent component
+          onImageUpload(data.secure_url);
         }
       })
       .catch((error) => {

@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import apiBase from "../utils/api";
+import DOMPurify from "dompurify";
 import "./fullblog.css";
 
 function FullBlog() {
@@ -33,6 +34,26 @@ function FullBlog() {
 
   const { title, content, updatedAt, user } = data;
 
+  const sanitizedContent = DOMPurify.sanitize(content, {
+    ALLOWED_TAGS: [
+      "b",
+      "i",
+      "u",
+      "a",
+      "p",
+      "ul",
+      "ol",
+      "li",
+      "h1",
+      "h2",
+      "h3",
+      "img",
+      "blockquote",
+      "code",
+    ],
+    ALLOWED_ATTR: ["href", "src", "alt", "title"],
+  });
+
   return (
     <div className="full-blog">
       <h1>{title}</h1>
@@ -41,7 +62,7 @@ function FullBlog() {
       </p>
       <p>Last updated: {new Date(updatedAt).toDateString()}</p>
       <div className="blog-content">
-        <p>{content}</p>
+        <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
       </div>
     </div>
   );

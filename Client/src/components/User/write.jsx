@@ -1,11 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import DOMPurify from "dompurify";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import apiBase from "../utils/api";
 import Account from "./accountHeader";
-import Input from "../utils/input";
 import "./write.css";
 
 const Write = () => {
@@ -13,7 +13,6 @@ const Write = () => {
   const [content, setContent] = useState("");
   const navigate = useNavigate();
 
-  const quillRef = useRef(null);
   const handleTitleChange = (e) => setTitle(e.target.value);
 
   const { mutate, isLoading } = useMutation({
@@ -42,18 +41,37 @@ const Write = () => {
     },
   });
 
+  const cleanContent = (dirtyContent) => {
+    return DOMPurify.sanitize(dirtyContent, {
+      ALLOWED_TAGS: [
+        "b",
+        "i",
+        "u",
+        "a",
+        "p",
+        "ul",
+        "ol",
+        "li",
+        "h1",
+        "h2",
+        "h3",
+        "img",
+        "blockquote",
+        "code",
+      ],
+      ALLOWED_ATTR: ["href", "src", "alt", "title"],
+    });
+  };
+
   const handleSave = () => {
     if (!title || !content) {
       alert("Please fill in both title and content!");
       return;
     }
-    mutate({ title, content });
-  };
 
-  const handleImageUpload = (imageURL) => {
-    const editor = quillRef.current.getEditor();
-    const range = editor.getSelection();
-    editor.insertEmbed(range.index, "image", imageURL);
+    const cleanedContent = cleanContent(content);
+
+    mutate({ title, content: cleanedContent });
   };
 
   return (
@@ -70,13 +88,10 @@ const Write = () => {
           className="title-input"
         />
 
-        <Input onImageUpload={handleImageUpload} />
-
         <ReactQuill
-          ref={quillRef}
           value={content}
           onChange={setContent}
-          placeholder="Write your experience here..."
+          placeholder="Write your content here..."
           modules={{
             toolbar: [
               [{ header: "1" }, { header: "2" }, { font: [] }],
@@ -85,6 +100,7 @@ const Write = () => {
               [{ color: [] }, { background: [] }],
               [{ list: "ordered" }, { list: "bullet" }],
               ["link", "image", "video"],
+              ["blockquote", "code-block"],
               ["clean"],
             ],
           }}
@@ -103,6 +119,9 @@ const Write = () => {
             "link",
             "image",
             "video",
+            "blockquote",
+            "code-block",
+            "paragraph",
           ]}
         />
 
@@ -111,7 +130,7 @@ const Write = () => {
           disabled={isLoading}
           className="save-button"
         >
-          {isLoading ? <b>Posting...</b> : <b>Post</b>}
+          {isLoading ? <b>Saving...</b> : <b>Save Blog</b>}
         </button>
       </div>
     </div>

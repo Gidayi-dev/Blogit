@@ -15,39 +15,35 @@ function EditBlog() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  // const { isLoading, isError, error } = useQuery({
-  //   queryKey: ["updateBlog"],
-  //   queryFn: async () => {
-  //     const response = await fetch(`${apiBase}/blogs/${blogId}`, { credentials: "include" });
-  //   }
-  // })
-  // Fetch the existing blog data when the component mounts
-  useEffect(() => {
-    const fetchBlog = async () => {
-      try {
-        const response = await fetch(`${apiBase}/blogs/${id}`, {
-          method: "GET",
-          credentials: "include",
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setTitle(data.title);
-          setContent(data.content);
-        } else {
-          throw new Error("Failed to fetch blog details");
-        }
-      } catch (err) {
+  // Fetch the existing blog data using useQuery
+  const {
+    data: blog,
+    isLoading: isFetching,
+    error,
+  } = useQuery(
+    ["blog", id], // Use the blog id as part of the query key
+    async () => {
+      const response = await fetch(`${apiBase}/blogs/${id}`, {
+        method: "GET",
+        credentials: "include",
+      });
+      if (!response.ok) throw new Error("Failed to fetch blog details");
+      return response.json();
+    },
+    {
+      onSuccess: (data) => {
+        setTitle(data.title);
+        setContent(data.content);
+      },
+      onError: () => {
         toast.error("Failed to load blog");
-      }
-    };
-
-    fetchBlog();
-  }, [id]);
+      },
+    },
+  );
 
   // Mutation for updating the blog
   const { mutate, isLoading } = useMutation({
-    mutationFn: async (updateBlog) => {
+    mutationFn: async (updatedBlog) => {
       const response = await fetch(`${apiBase}/blogs/${id}`, {
         method: "PUT",
         credentials: "include",
@@ -60,12 +56,11 @@ function EditBlog() {
       if (!response.ok) {
         throw new Error("Failed to update blog");
       }
-
       return response.json();
     },
     onSuccess: () => {
       toast.success("Blog updated successfully!");
-      queryClient.invalidateQueries("blogs"); // Refresh the blogs list
+      queryClient.invalidateQueries(["blogs"]); // Refresh the blogs list
       navigate("/blogs");
     },
     onError: (error) => {
@@ -79,8 +74,12 @@ function EditBlog() {
       toast.error("Please fill in both title and content!");
       return;
     }
-    mutate({ title, content });
+    const plainContent = content.replace(/<\/?[^>]+(>|$)/g, ""); // Remove HTML tags
+    mutate({ title, content: plainContent });
   };
+
+  if (isFetching) return <div>Loading blog...</div>;
+  if (error) return <div>Error loading blog</div>;
 
   return (
     <div className="write-section">
@@ -108,7 +107,8 @@ function EditBlog() {
               [{ color: [] }, { background: [] }],
               [{ list: "ordered" }, { list: "bullet" }],
               ["link", "image", "video"],
-              ["clean"],
+              ["blockquote", "code-block"],
+              ["clean"], // Clears all content
             ],
           }}
           formats={[
@@ -126,6 +126,8 @@ function EditBlog() {
             "link",
             "image",
             "video",
+            "blockquote",
+            "code-block",
           ]}
         />
 
