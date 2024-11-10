@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import apiBase from "../utils/api";
 import Account from "./accountHeader";
+import Input from "../utils/input";
 import "./write.css";
 
 const Write = () => {
-  const [title, SetTitle] = useState("");
+  const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const navigate = useNavigate();
 
-  const handleTitleChange = (e) => SetTitle(e.target.value);
+  const quillRef = useRef(null);
+  const handleTitleChange = (e) => setTitle(e.target.value);
 
   const { mutate, isLoading } = useMutation({
     mutationFn: async (newBlog) => {
@@ -48,6 +50,12 @@ const Write = () => {
     mutate({ title, content });
   };
 
+  const handleImageUpload = (imageURL) => {
+    const editor = quillRef.current.getEditor();
+    const range = editor.getSelection();
+    editor.insertEmbed(range.index, "image", imageURL);
+  };
+
   return (
     <div className="write-section">
       <Account />
@@ -62,10 +70,13 @@ const Write = () => {
           className="title-input"
         />
 
+        <Input onImageUpload={handleImageUpload} />
+
         <ReactQuill
+          ref={quillRef}
           value={content}
           onChange={setContent}
-          placeholder="Write your experience here...."
+          placeholder="Write your experience here..."
           modules={{
             toolbar: [
               [{ header: "1" }, { header: "2" }, { font: [] }],

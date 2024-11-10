@@ -64,7 +64,7 @@ function BlogsPage() {
   };
 
   const handleEdit = (blogId) => {
-    navigate(`/Write/${blogId}`);
+    navigate(`/EditBlog/${id}`);
   };
 
   return (

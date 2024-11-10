@@ -40,6 +40,7 @@ const App = () => {
           <Route path="/Profile" element={<Profile />} />
           <Route path="/blogs/:id" element={<FullBlog />} />
           <Route path="/blogs" element={<Feed />} />
+          <Route path="/edit/:blogId" element={<EditBlog />} />
         </Routes>
       </Router>
     </QueryClientProvider>
