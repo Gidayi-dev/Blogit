@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import apiBase from "../utils/api";
 import DOMPurify from "dompurify";
 import "./fullblog.css";
+import Account from "./accountHeader";
 
 function FullBlog() {
   const { id } = useParams();
@@ -55,14 +56,17 @@ function FullBlog() {
   });
 
   return (
-    <div className="full-blog">
-      <h1>{title}</h1>
-      <p>
-        By {user.firstname} {user.lastname}
-      </p>
-      <p>Last updated: {new Date(updatedAt).toDateString()}</p>
-      <div className="blog-content">
-        <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+    <div>
+      <Account />
+      <div className="full-blog">
+        <h1>{title}</h1>
+        <p>
+          By {user.firstname} {user.lastname}
+        </p>
+        <p>Last updated: {new Date(updatedAt).toDateString()}</p>
+        <div className="blog-content">
+          <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+        </div>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import blogs from "../data/blogs";
 import apiBase from "../utils/api";
 import { Link } from "react-router-dom";
+import Account from "./accountHeader";
 
 function Feed() {
   const { isLoading, isError, error, data } = useQuery({
@@ -30,28 +31,31 @@ function Feed() {
   const blogData = data?.length ? data : blogs;
 
   return (
-    <div className="feed-container">
-      {blogData.length > 0 ? (
-        blogData.map((blog) => (
-          <div key={blog.id} className="blog-card">
-            <h3>{blog.title}</h3>
-            <p>{blog.content}</p>
-            <div className="author-details">
-              <div>
-                <span>
-                  {blog.user?.firstname} {blog.user?.lastname}
-                </span>
-                <p>{new Date(blog.createdAt).toLocaleDateString()}</p>
+    <div>
+      <Account />
+      <div className="feed-container">
+        {blogData.length > 0 ? (
+          blogData.map((blog) => (
+            <div key={blog.id} className="blog-card">
+              <h3>{blog.title}</h3>
+              <p>{blog.content}</p>
+              <div className="author-details">
+                <div>
+                  <span>
+                    {blog.user?.firstname} {blog.user?.lastname}
+                  </span>
+                  <p>{new Date(blog.createdAt).toLocaleDateString()}</p>
+                </div>
               </div>
+              <Link to={`/blogs/${blog.id}`} className="read-more">
+                Read more
+              </Link>
             </div>
-            <Link to={`/blogs/${blog.id}`} className="read-more">
-              Read more
-            </Link>
-          </div>
-        ))
-      ) : (
-        <h2>No blogs available</h2>
-      )}
+          ))
+        ) : (
+          <h2>No blogs available</h2>
+        )}
+      </div>
     </div>
   );
 }

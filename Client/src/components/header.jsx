@@ -11,9 +11,9 @@ const Header = () => {
         <h2>Blogit</h2>
       </div>
       <div className="login">
-        <Link to="/AllBlogs" className="button">
+        {/* <Link to="/blogs" className="button">
           Blogs
-        </Link>
+        </Link> */}
         <Link to="/signin" className="button">
           Sign In
         </Link>

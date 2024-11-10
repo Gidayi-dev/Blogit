@@ -91,3 +91,22 @@ export async function deleteBlog(req, res) {
       .json({ message: "Something went wrong please try again later.." });
   }
 }
+
+export async function updateBlog(req, res) {
+  try {
+    const { noteId } = req.params;
+    const { title, content } = req.body;
+    const userId = req.userId;
+
+    const blog = await prisma.blog.update({
+      where: { id: noteId, owner: userId },
+      data: { title, content },
+    });
+
+    res.status(200).json(blog);
+  } catch (e) {
+    res
+      .status(500)
+      .json({ message: "Something went wrong, please try again later" });
+  }
+}

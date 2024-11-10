@@ -5,10 +5,10 @@ function Hero() {
   const navigate = useNavigate();
 
   const handleCreateBlogClick = () => {
-    navigate("/signup");
+    navigate("/SignUp");
   };
   const handleExploreBlogClick = () => {
-    navigate("/AllBlogs");
+    navigate("/blogs");
   };
 
   return (

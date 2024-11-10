@@ -7,7 +7,6 @@ export const signInUser = async (req, res) => {
   try {
     const { emailAddress, password } = req.body;
 
-    // Check if the user exists: querying the database against the email
     const user = await client.user.findFirst({
       where: { emailAddress: emailAddress },
     });
@@ -18,23 +17,14 @@ export const signInUser = async (req, res) => {
         .json({ message: "Wrong email address or password" });
     }
 
-    //verify password
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res
         .status(401)
         .json({ message: "Wrong email address or password" });
     }
-    //successfully signed in, so generate a token, save the id in there
     const token = jwt.sign(user.id, process.env.JWT_SECRET);
 
-    // res
-    //   .status(200)
-    //   .json({
-    //     message: "Login successfully",
-    //     user: { id: user.id, emailAddress: user.emailAddress },
-    //   });
-    //authentication failure if user does not exist
     res.status(200).cookie("authToken", token, { httpOnly: true }).json(user);
   } catch (e) {
     console.error("SignIn error:", e);

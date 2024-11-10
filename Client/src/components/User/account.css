@@ -7,7 +7,7 @@
 }
 
 .head {
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
       rgba(0, 0, 0, 0.7),
       rgba(0, 0, 0, 0.8),
       rgba(0, 0, 0, 0.7)
@@ -16,7 +16,7 @@
   height: 65vh;
   background-size: cover;
   justify-content: center;
-  box-shadow: rgba(0, 0, 0, 0.1);
+  box-shadow: rgba(0, 0, 0, 0.1); */
 }
 
 .nav {

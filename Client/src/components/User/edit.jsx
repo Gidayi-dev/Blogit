@@ -15,13 +15,12 @@ function EditBlog() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  // Fetch the existing blog data using useQuery
   const {
     data: blog,
     isLoading: isFetching,
     error,
   } = useQuery(
-    ["blog", id], // Use the blog id as part of the query key
+    ["blog", id],
     async () => {
       const response = await fetch(`${apiBase}/blogs/${id}`, {
         method: "GET",
@@ -41,7 +40,6 @@ function EditBlog() {
     },
   );
 
-  // Mutation for updating the blog
   const { mutate, isLoading } = useMutation({
     mutationFn: async (updatedBlog) => {
       const response = await fetch(`${apiBase}/blogs/${id}`, {
@@ -60,7 +58,7 @@ function EditBlog() {
     },
     onSuccess: () => {
       toast.success("Blog updated successfully!");
-      queryClient.invalidateQueries(["blogs"]); // Refresh the blogs list
+      queryClient.invalidateQueries(["blogs"]);
       navigate("/blogs");
     },
     onError: (error) => {
@@ -68,13 +66,12 @@ function EditBlog() {
     },
   });
 
-  // Handle form submission
   const handleUpdate = () => {
     if (!title || !content) {
       toast.error("Please fill in both title and content!");
       return;
     }
-    const plainContent = content.replace(/<\/?[^>]+(>|$)/g, ""); // Remove HTML tags
+    const plainContent = content.replace(/<\/?[^>]+(>|$)/g, "");
     mutate({ title, content: plainContent });
   };
 
@@ -108,7 +105,7 @@ function EditBlog() {
               [{ list: "ordered" }, { list: "bullet" }],
               ["link", "image", "video"],
               ["blockquote", "code-block"],
-              ["clean"], // Clears all content
+              ["clean"],
             ],
           }}
           formats={[
